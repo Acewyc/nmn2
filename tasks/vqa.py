@@ -79,7 +79,7 @@ def compute_normalizers(config):
         image_ids = [q["image_id"] for q in questions]
         if hasattr(config, "debug"):
             image_ids = image_ids[:config.debug]
-        for image_id in image_ids:
+        for image_id in list(set(image_ids)):
             with np.load(IMAGE_FILE % ("train2014", "train2014", image_id)) as zdata:
                 assert len(zdata.keys()) == 1
                 image_data = zdata[zdata.keys()[0]]
